@@ -25,7 +25,7 @@ import subprocess
 import ssl
 import thread
 
-DEBUG = False
+DEBUG = True
 
 MAX_GROUP_NUM = 35  # 每组人数
 INTERFACE_CALLING_INTERVAL = 20  # 接口调用时间间隔, 间隔太短容易出现"操作太频繁", 会被限制操作半小时左右
@@ -262,7 +262,7 @@ def webwxinit():
     state = responseState('webwxinit', dic['BaseResponse'])
     return state
 
-
+# 有问题，返回结果为空
 def webwxgetcontact():
 
     url = base_uri + \
@@ -493,6 +493,7 @@ def main():
         return
 
     MemberList = webwxgetcontact()
+    print(MemberList)
 
     print('开启心跳线程')
     thread.start_new_thread(heartBeatLoop, ())
